@@ -1,0 +1,87 @@
+﻿<div class="form-login" role="form" ng-controller="doctorRegistrationViewModel as vm">
+
+    <form name="doctor">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6 align-left">
+                <h3 class="form-login-heading ">{{vm.title}}</h3>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.registrationNo.$error.required && !doctor.registrationNo.$pristine}">
+                    <div class="col-md-3">Registration No : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="registrationNo" ng-minlength="3" ng-maxlength="20" class="form-control" placeholder="Registration No" data-ng-model="vm.doctorInfo.regNo" required>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Date of Registration : </div>
+                    <div class="col-md-9">
+                        <input kendo-date-picker name="registrationDate" class="form-control" data-ng-model="vm.registration.dateReg" required>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.medicalCouncil.$error.required && !doctor.medicalCouncil.$pristine}">
+                    <div class="col-md-3">State Medical Council : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="medicalCouncil" ng-minlength="3" ng-maxlength="20" class="form-control" placeholder="State Medical Council" data-ng-model="vm.doctorInfo.medicalCouncil" required>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.qualification.$error.required && !doctor.qualification.$pristine}">
+                    <div class="col-md-3">Qualification : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="qualification" ng-minlength="3" ng-maxlength="20" class="form-control" placeholder="Qualification" data-ng-model="vm.doctorInfo.qualificationName" required>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.vm.stateofCountry.$error.required && !doctor.vm.stateofCountry.$pristine}">
+                    <div class="col-md-3">Qualification Year : </div>
+                    <div class="col-md-9">
+                        <select id="state" class="form-control" ng-model="vm.doctorInfo.qualificationYear">
+                            <option value="">Year</option>
+                            <option ng-repeat="year in vm.years" value="{{year}}">{{year}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.universityName.$error.required && !doctor.universityName.$pristine}">
+                    <div class="col-md-3">University Name : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="universityName" ng-minlength="3" ng-maxlength="20" class="form-control" placeholder="University Name" data-ng-model="vm.doctorInfo.qualificationUniversity" required>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.fatherName.$error.required && !doctor.fatherName.$pristine}">
+                    <div class="col-md-3">Father/Husband Name : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="fatherName" ng-minlength="3" ng-maxlength="20" class="form-control" placeholder="Father/Husband Name" data-ng-model="vm.doctorInfo.fatherName" required>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':doctor.permanentAddress.$error.required && !doctor.permanentAddress.$pristine}">
+                    <div class="col-md-3">Permanent Address : </div>
+                    <div class="col-md-9">
+                        <textarea rows="4" name="permanentAddress" class="form-control" placeholder="Permanent Address" data-ng-model="vm.doctorInfo.permanentAddress" required />
+
+                    </div>
+                </div>
+                <div class="padding-10 row div-submit-btn inlineDisplay">
+                    <div class="col-md-6 padding-10">
+                    </div>
+                    <div class="col-md-6 padding-10">
+                        <button class="btn btn-info btn-form" type="button" data-ng-click="vm.becomeDoctor()"
+                            ng-disabled="doctor.username.$error.required ||
+                         createLogin.username.$error.minlength ||
+                         createLogin.password.$error.required ||
+                         createLogin.password.$error.minlength ||
+                         createLogin.password.$error.pattern">
+                            Submit</button>
+                    </div>
+                </div>
+                <div data-ng-hide="vm.message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                    {{vm.message}}
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+</div>
+

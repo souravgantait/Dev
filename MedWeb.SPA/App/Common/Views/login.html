@@ -1,0 +1,26 @@
+﻿<form role="form" ng-controller="loginController">
+    <div class="row">
+        <div class="col-md-4">
+            &nbsp;
+        </div>
+        <div class="col-md-4">
+            <h2 class="form-login-heading width-60-percent align-center">Login</h2>
+            <div class="padding-10">
+                <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+            </div>
+            <div class="padding-10">
+                <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+            </div>
+            <div class="padding-10">
+                <button class="btn btn-md btn-info btn-block width-60-percent margin-left-zero" type="submit" data-ng-click="login()">Login</button>
+            </div>
+            <div data-ng-hide="message == ''" class="alert alert-danger width-60-percent">
+                {{message}}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            &nbsp;
+        </div>
+    </div>
+</form>

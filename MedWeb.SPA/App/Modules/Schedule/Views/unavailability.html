@@ -1,0 +1,252 @@
+﻿<div class="form-group" role="form" ng-controller="unAvailable as vm">
+    <form class="container" name="unavailableDoctor" role="form">
+        <style>
+            .form-control {
+                border-radius: 3px !important;
+            }
+
+            .btn {
+                border-radius: 3px !important;
+            }
+        </style>
+        <div class="row">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4 align-center">
+                <h3>Unavailability Setup</h3>
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+                <div>
+                    <h5>Location :</h5>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <h5>Location:
+                </h5>
+                <div class="padding-10">
+
+                    <span ng-repeat="place in vm.places">
+                        <input type="checkbox" name="places" checklist-model="vm.locationPlaceNames.checked">
+                        {{place.name}}<br />
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="row">
+                    <h5>Date Range</h5>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>From</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+                            <input kendo-date-picker id="date1" class="form-control" k-format="'d MMMM, yyyy'" k-ng-model="vm.fromdateLocation" style="width: 80%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>To</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+
+                            <input kendo-date-picker id="date2"
+                                k-format="'d MMMM, yyyy'"
+                                name="locationTodatePicker"
+                                class="form-control"
+                                k-ng-model="vm.todateLocation"
+                                style="width: 80%" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Time slot : </h5>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>All Day </h5>
+                    </div>
+
+                    <div class="col-sm-2 align-left">
+                        <div class="padding-10">
+                            <input type="checkbox" data-ng-model="vm.allDaylongLocation" data-ng-click="vm.setTimeOfLocation(time)" class="left-align" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>From</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+                            <input kendo-time-picker name="time1" class="form-control" data-ng-model="vm.fromTimelocation" ng-disabled="vm.allDaylongLocation" style="width: 90%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>To</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+                            <input kendo-time-picker name="time2" class="form-control" data-ng-model="vm.toTimelocation" ng-disabled="vm.allDaylongLocation" style="width: 90%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-10 align-center">
+                    <button type="button" class="btn btn-info btn-form" data-ng-click="vm.markLocatioUnavailable()">Mark Unavailable</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-5">
+
+                <ul>
+                    <li ng-repeat="locs in vm.locationUnavailableList">
+                        <div class="padding-10">
+                            {{}}|{{locs.unavDate1Location | date:"d MMMM, yyyy"}}-{{locs.unavDate2Location|date:"d MMMM, yyyy"}}|{{locs.unavTime1Location | date :"shortTime"}}-{{locs.unavTime2Location | date:"shortTime"}}
+                            <button type="button" ng-click="vm.removeValueFromLocationList(locs)" class="btn btn-danger btn-xs" style="float: right;">x</button>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            &nbsp;
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+
+                <h5>Date :</h5>
+
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <h5>Location
+                    </h5>
+                </div>
+                <div class="padding-10">
+
+                    <span ng-repeat="place in vm.places">
+                        <input type="checkbox" name="ateLocation" checklist-model="vm.datePlaceNames.checked" checklist-value="role">
+                        {{place.name}}<br />
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <h5>Month/Date</h5>
+                </div>
+
+                <div class="padding-10">
+                    <div class="demo section k-content">
+                        <input kendo-date-picker
+                            k-format="'d MMMM, yyyy'"
+                            ng-model="dateString"
+                            k-ng-model="vm.dateObject"
+                            class="form-control" style="width: 28%" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Time slot : </h5>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>All Day </h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <input type="checkbox" ng-model="vm.allDaylongDate" ng-checked="false" ng-click="vm.setTimeOfDate(time)" class="left-align" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>From</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+                            <input kendo-time-picker name="time1" class="form-control" ng-model="vm.fromTimeDate" ng-disabled="vm.allDaylongDate" style="width: 90%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="padding-10">
+                            <span>To</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="padding-10">
+                            <input kendo-time-picker name="time2" class="form-control" ng-model="vm.toTimeDate" ng-disabled="vm.allDaylongDate" style="width: 90%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-10 align-center">
+                    <button type="button" class="btn btn-info btn-form" ng-click="vm.markUnavailableForDate()">Mark Unavailable</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    &nbsp;
+                </div>
+                <div class="col-md-5">
+                    <div>
+                        <ul>
+                            <li ng-repeat="dates in vm.dateunavailableList">
+                                <div class="padding-10">
+                                    {{dates.unavDateDate | date:"EEEE,d MMMM, yyyy " }}|{{dates.unavTime1Date | date: "shortTime"}}-{{dates.unavTime2Date | date: "shortTime"}}
+                                <button type="button" class="btn btn-danger btn-xs" style="float: right;" ng-click="vm.removeDate(dates)">x</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

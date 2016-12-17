@@ -1,0 +1,337 @@
+﻿<div class="form-login" role="form" ng-controller="signUp as vm">
+    <!--  <h2 class="form-login-heading">Sign Up</h2>-->
+    <form name="userDetails" ng-show="vm.toggleStep1">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6 align-left">
+                <h3 class="form-login-heading">User Details</h3>
+                <div class="padding-10 row" ng-class="{'has-error': userDetails.FirstName.$error.required && !userDetails.FirstName.$pristine}"
+                    ng-class="{'has-error': userDetails.FirstName.$error.pattern}"
+                    ng-class="{'has-error':userDetails.FirstName.$error.maxlength}">
+                    <div class="col-md-3">First Name : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="FirstName" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" placeholder="First Name" data-ng-model="vm.registration.FirstName" required autofocus>
+                        <span ng-show="userDetails.FirstName.$error.required && !userDetails.FirstName.$pristine" class=" help-block">First Name is required</span>
+                        <span ng-show="userDetails.FirstName.$error.pattern" class=" help-block">Not a valid name.</span>
+                        <span ng-show="userDetails.FirstName.$error.maxlength" class=" help-block">Too Long!</span>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Middle Name:</div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Middle Name" data-ng-model="vm.registration.MiddleName">
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':userDetails.LastName.$error.required && !userDetails.LastName.$pristine}"
+                    ng-class="{'has-error':userDetails.LastName.$error.maxlength}">
+
+                    <div class="col-md-3">Last Name:</div>
+                    <div class="col-md-9">
+                        <input type="text" name="LastName" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" placeholder="Last Name" data-ng-model="vm.registration.LastName" required>
+                        <span ng-show="userDetails.LastName.$error.required && !userDetails.LastName.$pristine" class=" help-block">Last Name is required</span>
+                        <span ng-show="userDetails.LastName.$error.pattern" class=" help-block">Not a valid name.</span>
+                        <span ng-show="userDetails.LastName.$error.maxlength" class=" help-block">Too Long!</span>
+                    </div>
+                </div>
+
+
+                <div class="padding-10 row" ng-class="{'has-error': userDetails.DOB.$dirty && userDetails.DOB.$error.required}">
+
+                    <div class="col-md-3">Date of Birth :</div>
+                    <div class="col-md-9">
+                        <input kendo-date-picker name="DOB" class="form-control" placeholder="mm/dd/yyyy" data-ng-model="vm.registration.DOB" required>
+                        <span ng-show="userDetails.DOB.$dirty && userDetails.DOB.$error.required" class=" help-block">Date of Birth is required</span>
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+
+                    <div class="col-md-3">Adhar Id :</div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Adhar Id" data-ng-model="vm.registration.AdharId">
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+
+                    <div class="col-md-3">PAN Number :</div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="PAN Number" data-ng-model="vm.registration.PanId">
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+
+                    <div class="col-md-3">Voter Id :</div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Voter Id" data-ng-model="vm.registration.VoterId">
+                    </div>
+                </div>
+
+                <div class="padding-10 align-center">
+                    <button class="btn btn-info  btn-form" type="button" data-ng-click="vm.showStep2()"
+                        ng-disabled="userDetails.DOB.$error.required || 
+                        userDetails.LastName.$error.required ||
+                        userDetails.FirstName.$error.required ||
+                        userDetails.LastName.$error.maxlength ||
+                        userDetails.FirstName.$error.maxlength">
+                        Proceed</button>
+                </div>
+                <style>
+                    .btn btn-info btn-form[disabled] {
+                        background-color: chocolate;
+                    }
+                </style>
+
+            </div>
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+
+    <form name="address" ng-show="vm.toggleStep2">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6 align-left">
+                <h3 class="form-login-heading ">Address</h3>
+                <div class="padding-10 row" ng-class="{'has-error':address.vm.stateofCountry.$error.required && !address.vm.stateofCountry.$pristine}">
+                    <div class="col-md-3">Country : </div>
+                    <div class="col-md-9">
+                        <select id="country" class="form-control" data-ng-model="vm.registration.Country" ng-options="country for (country,state) in vm.countries">
+                            <option value="">Country</option>
+                            <span ng-show="address.vm.stateofCountry.$error.required && !address.vm.stateofCountry.$pristine" class=" help-block">Select a country</span>
+                        </select>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">State : </div>
+                    <div class="col-md-9">
+                        <select id="state" class="form-control" ng-disabled="!vm.registration.Country" ng-model="vm.registration.State">
+                            <option value="">State</option>
+                            <option ng-repeat="state in vm.registration.Country.states" value="{{state}}">{{state}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':address.zipcode.$error.required && !address.zipcode.$pristine}"
+                    ng-class="{'has-error':address.zipcode.$error.pattern}"
+                    ng-class="{'has-error':address.zipcode.$error.minlength}"
+                    ng-class="{'has-error':address.zipcode.$error.maxlength}">
+                    <div class="col-md-3">zip Code : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="zipcode" ng-pattern="/^[0-9]*$/" ng-minlength="5" ng-maxlength="7" class="form-control" placeholder="Zip" data-ng-model="vm.registration.Zip" required>
+                        <span ng-show="address.zipcode.$error.required && !address.zipcode.$pristine" class="help-block ">Enter your Zip Code!</span>
+                        <span ng-show="address.zipcode.$error.pattern" class="help-block ">Only Digits!</span>
+                        <span ng-show="address.zipcode.$error.minlength" class="help-block ">Enter atleast 5 Digits!</span>
+                        <span ng-show="address.zipcode.$error.maxlength" class="help-block ">Maximum 7 Digits!</span>
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+                    <div class="col-md-3">Area : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Area" data-ng-model="vm.registration.Area">
+                    </div>
+                </div>
+
+                <div class="padding-10 row" ng-class="{'has-error':address.AddressLine1.$error.required && !address.AddressLine1.$pristine}">
+                    <div class="col-md-3">Address Line1 : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="AddressLine1" class="form-control" placeholder="AddressLine1" data-ng-model="vm.registration.AddressLine1" required>
+                        <span ng-show="address.AddressLine1.$error.required && !address.AddressLine1.$pristine" class="help-block ">AddressLine1 is Required!</span>
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+                    <div class="col-md-3">Address Line2 : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="AddressLine2" data-ng-model="vm.registration.AddressLine2">
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+                    <div class="col-md-3">Address Line3 : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="AddressLine3" data-ng-model="vm.registration.AddressLine3">
+                    </div>
+                </div>
+
+                <div class="padding-10 row">
+                    <div class="col-md-3">Landmark : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Landmark" data-ng-model="vm.registration.Landmark">
+                    </div>
+                </div>
+
+                <div class="padding-10 div-submit-btn inlineDisplay">
+                    <button class="btn btn-info btn-form" type="button" data-ng-click="vm.showStep1()">Back</button>
+                </div>
+                <div class="padding-10 inlineDisplay">
+                    <button class="btn btn-info  btn-form" type="button" data-ng-click="vm.showStep3()"
+                        ng-disabled="address.zipcode.$error.required || address.vm.stateofCountry.$error.required
+                        || address.AddressLine1.$error.required || address.zipcode.$error.pattern
+                        || address.zipcode.$error.minlength || address.zipcode.$error.maxlength">
+                        Proceed</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+
+    <form ng-show="vm.toggleStep3">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6 align-left">
+                <h3 class="form-login-heading">Passport Details</h3>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Unique Id : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="UId" data-ng-model="vm.registration.UId" required autofocus>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Location : </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Location" data-ng-model="vm.registration.Location" required>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Issue Date : </div>
+                    <div class="col-md-9">
+                        <input kendo-date-picker class="form-control" placeholder="IssueDate" data-ng-model="vm.registration.IssueDate" required>
+                    </div>
+                </div>
+                <div class="padding-10 row">
+                    <div class="col-md-3">Expiry Date : </div>
+                    <div class="col-md-9">
+                        <input kendo-date-picker class="form-control" placeholder="ExpiryDate" data-ng-model="vm.registration.ExpiryDate" required>
+                    </div>
+                </div>
+
+                <div class="padding-10 div-submit-btn inlineDisplay">
+                    <button class="btn btn-info btn-form" type="button" data-ng-click="vm.showStep2()">Back</button>
+                </div>
+                <div class="padding-10 inlineDisplay">
+                    <button class="btn btn-info  btn-form" type="button" data-ng-click="vm.showStep4()">Proceed</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+
+    <form ng-show="vm.toggleStep4">
+       <div class="row">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4 align-center">
+                <h3 class="form-login-heading">Upload profile photo</h3>
+                <div class="padding-10">
+                    <div class="align-center">
+                        <b>Preview:</b><br />
+                        <div ng-hide="vm.PhotoVisible" style="width: 200px; height: 200px; background-color: gray">
+                            <i>No image choosed</i>
+                        </div>
+                        <div ng-show="vm.PhotoVisible" style="width: 200px; height: 200px;">
+                            <img ng-src="{{vm.Picture}}" style="width: 200px; height: 200px;" />
+                        </div>
+                        <br />
+                    </div>
+                    <div>
+                        <input type="file" file-select="vm.onFileSelect($files)">
+                    </div>
+
+                </div>
+                <div class="padding-10 div-submit-btn inlineDisplay">
+                    <button class="btn btn-info btn-form" type="button" data-ng-click="vm.showStep3()">Back</button>
+                </div>
+                <div class="padding-10 div-submit-btn inlineDisplay">
+                    <button class="btn btn-info btn-form" type="button" data-ng-click="vm.showStep5()">Proceed</button>
+                </div>
+                <div data-ng-hide="vm.message == ''" data-ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                    {{vm.message}}
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+
+    <form name="createLogin" ng-show="vm.toggleStep5">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6 align-left">
+                <h3 class="form-login-heading">Create Login</h3>
+                <div class="padding-10 row" ng-class="{'has-error':createLogin.username.$error.required && !createLogin.username.$pristine}"
+                    ng-class="{'has-error':createLogin.username.$error.minlength}">
+                    <div class="col-md-3">User Name : </div>
+                    <div class="col-md-9">
+                        <input type="text" name="username" ng-minlength="6" ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" placeholder="Username" data-ng-model="vm.registration.LoginId" required autofocus>
+                        <span ng-show="createLogin.username.$error.required && !createLogin.username.$pristine" class="help-block">Username Required</span>
+                        <span ng-show="createLogin.username.$error.minlength" class="help-block">Username should contain minimum 6 charcters</span>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':createLogin.password.$error.required && !createLogin.password.$pristine}"
+                    ng-class="{'has-error':createLogin.password.$error.minlength}"
+                    ng-class="{'has-error':createLogin.password.$error.pattern}">
+                    <div class="col-md-3">Password : </div>
+                    <div class="col-md-9">
+                        <input type="password" name="password" ng-minlength="8" ng-pattern="/(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])/" class="form-control" placeholder="Password" data-ng-model="vm.registration.Password" required>
+                        <span ng-show="createLogin.password.$error.required && !createLogin.password.$pristine" class="help-block">Password is Required!</span>
+                        <span ng-show="createLogin.password.$error.minlength" class="help-block">Must contains minimum 8 characters.</span>
+                        <span ng-show="createLogin.password.$error.pattern" class="help-block">Combination of alphabets,digits and special character.</span>
+                    </div>
+                </div>
+                <div class="padding-10 row" ng-class="{'has-error':createLogin.confirmPassword.$error.required && !createLogin.confirmPassword.$pristine}"
+                    ng-class="{'has-error':!createLogin.confirmPassword.$error.required && createLogin.confirmPassword.$error.noMatch && createLogin.confirmPassword.$dirty}">
+                    <div class="col-md-3">Confirm Password : </div>
+                    <div class="col-md-9">
+                        <input type="password" name="confirmPassword" ng-minlength="8" ng-model="vm.comfirmPassword" class="form-control" placeholder="Confirm Password" required valid-password-confirm>
+                        <span ng-show="createLogin.confirmPassword.$error.required && !createLogin.confirmPassword.$pristine" class="help-block">Confirm Password is Required!</span>
+                        <span ng-show="!createLogin.confirmPassword.$error.required && createLogin.confirmPassword.$error.noMatch && createLogin.confirmPassword.$dirty">Passwords do not match.</span>
+                    </div>
+                </div>
+                <!--<div class="padding-10">
+                    <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
+                </div>-->
+                <div class="padding-10 row div-submit-btn inlineDisplay">
+                    <div class="col-md-6 padding-10">
+                        <button class="btn btn-info btn-form" type="button" data-ng-click="vm.showStep4()">Back</button>
+                    </div>
+                    <div class="col-md-6 padding-10">
+                        <button class="btn btn-info btn-form" type="button" data-ng-click="vm.signUp()"
+                            ng-disabled="createLogin.username.$error.required ||
+                         createLogin.username.$error.minlength ||
+                         createLogin.password.$error.required ||
+                         createLogin.password.$error.minlength ||
+                         createLogin.password.$error.pattern">
+                            Submit</button>
+                    </div>
+                </div>
+                <div data-ng-hide="vm.message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                    {{vm.message}}
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </form>
+</div>
+

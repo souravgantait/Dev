@@ -1,0 +1,34 @@
+﻿<section class="mainbar" data-ng-controller="schedule as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                        <div class="clearfix">
+                            <div kendo-scheduler="scheduler" k-options="vm.schedulerOptions">
+                                <span k-event-template class='custom-event'>{{dataItem.title}}</span>
+                                <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+
+
+                        <style>
+                            .custom-event {
+                                color: #fff;
+                                text-shadow: 0 1px 0 #000;
+                            }
+
+                            .custom-all-day-event {
+                                text-align: center;
+                                text-transform: uppercase;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

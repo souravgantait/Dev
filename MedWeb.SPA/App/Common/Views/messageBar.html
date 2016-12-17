@@ -1,0 +1,61 @@
+﻿<div id="multiSelectDropdown">
+    <div id="multiSelectTextbox" style="width:155px;" ng-click="viewDropdown()">
+        <span class="k-widget k-dropdown transparent-border" style="width: 100%;">
+            <span class="k-dropdown-wrap">
+                <span class="k-input">
+                    {{displayOnDropdown}}
+                </span>
+                <span class="k-select cursor-pointer" ng-class="{'invert-arrow': showDropdown}"> <!--<span class="k-icon k-i-arrow-s">select</span>--></span>
+            </span>
+        </span>
+    </div>
+    <div id="multiselectContainer" ng-show="showDropdown">
+        <div class="k-list-container k-popup list-container zero-padding">
+            <div class="multiselect-container">
+
+                <div class="dropdown-content">
+                    <div class="scroll-div">
+                        <div id="selectAllDiv" class="row margin-top-2">
+                            <div class="col-sm-2 zero-padding-left-right">
+                                <span class="form-elements cursor-pointer">
+                                    <input id="{{selectAllCheckboxText}}" type="checkbox" ng-model="selectAllCheckboxValue" ng-click="clickSelectAll()">
+                                    <label for="{{selectAllCheckboxText}}"><span class="f0">checkbox icon</span></label>
+                                </span>
+                            </div>
+                            <div class="col-sm-8 zero-padding-left-right white-space-normal">
+                                <p>{{selectAllCheckboxText}}</p>
+                            </div>
+                        </div>
+                        <div class="row zero-margin-top" ng-repeat="obj in objectArray">
+                            <div class="col-sm-2 zero-padding-left-right">
+                                <span class="form-elements cursor-pointer">
+                                    <input id="{{obj.Id}}" type="checkbox" ng-model="obj.select" ng-click="toggleSelect(obj)">
+                                    <label for="{{obj.Id}}"><span class="f0">checkbox icon</span></label>
+                                </span>
+                            </div>
+                            <div class="col-sm-8 zero-padding-left-right white-space-normal">
+                                <p>{{obj.Name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-dropdown-buttons">
+                    <div class="inline-block zero-padding margin-right-2">
+                        <button class="button k-button compact-filter-button" ng-click="apply()"
+                                ng-disabled="disableApplyButton" translate>
+                            Apply
+                        </button>
+
+                    </div>
+                    <div class="inline-block zero-padding">
+                        <button class="button button-secondary k-button compact-filter-button"
+                                ng-click="cancel()" translate>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

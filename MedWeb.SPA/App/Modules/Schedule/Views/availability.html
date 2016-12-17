@@ -1,0 +1,273 @@
+﻿<div class="form-group" role="form" ng-controller="available as vm">
+    <form name="availableDoctor" role="form">
+        <style>
+                .form-control {
+                    border-radius: 3px !important;
+                }
+
+                .btn {
+                    border-radius: 3px !important;
+                }
+            </style>
+        <div class="row">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4 align-center">
+                <h3 class="form-available-heading">Availability Set Up</h3>
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+                <div class="padding-10">
+                    <span>Location : </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="padding-10">
+                    <select name="location" ng-model="vm.location" class="form-control" style="width: 45%" ng-options="location.name for location in vm.locations">
+                        <option value="">Location</option>
+                    </select>
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+               &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+                <div class="padding-10">
+                    <span>Everyday :</span>
+                </div>
+
+            </div>
+            <div class="col-md-5">
+                <div class="padding-10">
+                    <span>From</span>
+                    <input kendo-time-picker id="time" class="form-control" ng-model="vm.fromTime" style="width: 25%" />
+
+                    <span>To</span>
+                    <input kendo-time-picker id="time" class="form-control" ng-model="vm.toTime" style="width: 25%" />
+                    <button type="button" class="btn btn-info btn-form" name="time" ng-model="vm.value.time" ng-click="vm.addTime()" style="float: right;">Add Time</button>
+                </div>
+
+
+            </div>
+            <div class="col-md-3">
+                <div class="padding-10">
+                    <ul>
+                        <li ng-repeat="time in vm.fromtimeList">
+                            <div class="padding-10">
+                            {{time.fromTimeEveryday}}-{{time.toTimeEveryday}}
+                            <button type="button" ng-click="vm.removeEverydayTime(time)" class="btn btn-danger btn-xs " style="float: right;">x</button>
+                        </div>
+                                </li>
+
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            &nbsp;
+        </div>
+        <div id="weekly"></div>
+        <div id="container">
+            <div class="row">
+
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+                <div class="col-md-1">
+                    <div class="padding-10">
+                        <span>Weekly :</span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5">
+                    <div class="padding-10">
+                        <div class="row">
+                            <div class="col-sm-2"><span>Recur :</span></div>
+                            <div class="col-sm-3">
+
+                                <input type="radio" name="everyWeek" ng-model="vm.everyweek" value="every" ng-change="vm.weeksunchecked()" />Every Week
+                                    
+                            </div>
+
+                            <div class="col-sm-7">
+
+                                <label>
+                                    <input type="radio" name="everyweek" ng-model="everyweek" value="option" /></label>
+
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="checkweek" ng-checked="yes" ng-model="vm.firstweek" ng-disabled="everyweek=='every'" />1st</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="checkweek" ng-checked="yes" ng-model="vm.secondweek" ng-disabled="everyweek=='every'" />2nd</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="checkweek" ng-checked="yes" ng-model="vm.thirdweek" ng-disabled="everyweek=='every'" />3rd</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="checkweek" ng-checked="yes" ng-model="vm.fourthweek" ng-disabled="everyweek=='every'" />4th</label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="checkweek" ng-checked="yes" ng-model="vm.fifthweek" ng-disabled="everyweek=='every'" />5th</label>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="padding-10">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.sunday" />Sun</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.monday" />Mon</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.tuesday" />Tue</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.wednesday" />Wed</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.thursday" />Thu</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.friday" />Fri</label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="checkday" ng-model="vm.satday" />Sat</label>
+                        </div>
+                    </div>
+                    <div class="padding-10">
+                        <button type="button" ng-model="vm.addweekly" class="btn btn-info btn-form" ng-click="vm.cloneweekly()" style="float: right;">Add Weekly</button>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="padding-10">
+                            <span>From</span>
+                            <input kendo-time-picker id="time" class="form-control" ng-model="vm.weeklyFromTime" style="width: 38%" />
+                            <span>To</span>
+                            <input kendo-time-picker id="time" class="form-control" ng-model="vm.weeklyToTime" style="width: 38%" />
+
+                            <div class="padding-10">
+                                <button type="button" class="btn btn-info btn-form" name="weeklyTimeAdd" ng-model="vm.weeklyAddTime" ng-click="vm.addTimeforWeekly()" style="float: right;">Add Time</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="padding-10">
+                        <ul>
+                            <li ng-repeat="weeklytime in vm.timeForWeekly">
+                                <div class="padding-10">
+                                {{weeklytime.fromTimeWeekly}}-{{weeklytime.toTimeWeekly}}
+                               <button type="button" ng-click="vm.removeWeeklyTime(weeklytime)" class="btn btn-danger btn-xs" style="float: right;">x</button>
+                                    </div>
+                                    </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-1">
+                <div class="padding-10">
+                    <span>Monthly :</span>
+                </div>
+            </div>
+            <div class="col-md-5">
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="padding-10">
+                            <div class="demo section k-content">
+                                <input kendo-date-picker
+                                    k-format="'d MMMM, yyyy'"
+                                    ng-model="vm.dateString"
+                                    k-ng-model="vm.dateObject" class="form-control"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+
+                        <div class="padding-10">
+                            <button type="button" class="btn btn-info btn-form" ng-model="vm.addDateMonthly" ng-click="vm.addDate()" style="float: right;">Add Date</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div>
+                            <ul>
+                                <li ng-repeat="date in vm.dateList">
+                                    <div class="padding-10">
+                                        {{date.date | date:"EEEE, MMMM d, yyyy"}}
+                                <button type="button" ng-click="vm.removeDate(date)" class="btn btn-danger btn-xs" style="float: right;">x</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+
+                    <div class="padding-10">
+                        <span>From</span>
+                        <input kendo-time-picker id="time" class="form-control" ng-model="vm.monthlyFromTime" style="width: 38%" />
+                        <span>To</span>
+                        <input kendo-time-picker id="time" class="form-control" ng-model="vm.monthlyToTime" style="width: 38%" />
+
+                        <div class="padding-10">
+                            <button type="button" ng-model="vm.monthlytimeAdd" class="btn btn-info btn-form" ng-click="vm.addTimeForMonthly()" style="float: right;">Add Time</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-10">
+                    <ul>
+                        <li ng-repeat="monthlytime in vm.timeforMonthly">
+                            <div class="padding-10">
+                                {{monthlytime.fromTimeMonthly}}-{{monthlytime.toTimeMonthly}}
+                                <button type="button" ng-click="vm.removeMonthlyTime(monthlytime)" class="btn btn-danger btn-xs" style="float: right;">x</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
