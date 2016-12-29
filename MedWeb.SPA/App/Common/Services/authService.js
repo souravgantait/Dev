@@ -8,7 +8,9 @@ angular.module('app').factory('authService', ['$rootScope', '$http', '$q', 'loca
         isAuthenticated: false,
         userName: "",
         useRefreshTokens: false,
-        userPhoto :""
+        userPhoto: "",
+
+        'role': 'doctor'
     };
 
     authServiceFactory.saveRegistration = saveRegistration;
@@ -103,7 +105,7 @@ angular.module('app').factory('authService', ['$rootScope', '$http', '$q', 'loca
     };
 
   function saveRegistration(registration, picture) {
-        logOut();
+        //logOut();
         var inData = JSON.stringify({ CitizenLocationDigitalMaster: CreateRegistrationInput(registration), Photo: picture });
         return $http.post(serviceEndpoints.userServiceUrl + 'api/CitizenLocationDigitalMasters/SignUp',
             inData,
@@ -156,10 +158,10 @@ angular.module('app').factory('authService', ['$rootScope', '$http', '$q', 'loca
 
     };
 
-    function becomeDoctor(doctorData) {
+    function becomeDoctor(doctorData, accountId) {
 
        // var inData = JSON.stringify({ CitizenLocationDigitalMaster: CreateRegistrationInput(registration), Photo: picture });
-        return $http.post(serviceEndpoints.userServiceUrl + 'api/Doctors/InsertDoctor',
+        return $http.post(serviceEndpoints.userServiceUrl + 'api/Doctors/InsertDoctor?AccountId=' + accountId,
             doctorData,
             {
                 headers:
@@ -207,6 +209,7 @@ angular.module('app').factory('authService', ['$rootScope', '$http', '$q', 'loca
                 'userName': decodedToken.Claims.sub,
                 'role': decodedToken.Claims.role,
                 'citizenLocationDigitalMasterid': decodedToken.Claims.citizenLocationDigitalMasterid,
+                'accountid': decodedToken.Claims.accountid,
                 'data': getToken(),
                 'refreshFlag': true,
                 'expiry': decodedToken.Claims.exp,

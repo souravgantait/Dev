@@ -16,11 +16,13 @@
     ]);
 
     app.constant('serviceEndpoints', {
-        userServiceUrl: 'http://localhost:50414/',
-      //  userServiceUrl: 'http://medwebusers.azurewebsites.net/',        
-        authenticationServiceUrl: 'http://localhost:63675/',
-       // authenticationServiceUrl: 'http://medweb-authentication.azurewebsites.net/',
-        appServiceUrl: 'http://localhost:51351/',
+       // userServiceUrl: 'http://localhost:50414/',
+        userServiceUrl: 'http://medwebusers.azurewebsites.net/',        
+        //authenticationServiceUrl: 'http://localhost:63675/',
+        authenticationServiceUrl: 'http://medweb-authentication.azurewebsites.net/',
+        appServiceUrl: 'http://medweb-common.azurewebsites.net/',
+       // appServiceUrl: 'http://localhost:51351/',
+
         clientId: 'MedClientApp'
     });       
 })();

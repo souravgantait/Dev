@@ -25,8 +25,8 @@
         }
 
         vm.becomeDoctor = function () {
-            vm.doctorInfo.CitizenLocationDigitalMasterId = authService.getUser().citizenLocationDigitalMasterid;
-            authService.becomeDoctor(vm.doctorInfo).then(function (response) {
+           var accountId = authService.getUser().citizenLocationDigitalMasterid;
+           authService.becomeDoctor(vm.doctorInfo, accountId).then(function (response) {
                 vm.savedSuccessfully = true;
                 vm.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
                 startTimer();

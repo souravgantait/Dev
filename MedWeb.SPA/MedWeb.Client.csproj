@@ -376,6 +376,7 @@
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Content\kendo\2014.3.1119\images\kendoui.woff" />
     <Content Include="Content\kendo\2014.3.1119\images\kendoui.ttf" />
+    <None Include="Properties\PublishProfiles\medreix-client - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\medreix-client.pubxml" />
     <None Include="Properties\PublishProfiles\MedWeb-Client.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
